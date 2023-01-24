@@ -2,7 +2,7 @@ import * as sc from './/AddItemScreen.sc';
 import React, {FunctionComponent, useState} from 'react';
 import {Spacer} from '../../utils/Spacer/Spacer';
 import {MainButton} from '../../components/MainButton/MainButton';
-import storage from '@react-native-firebase/storage';
+// import storage from '@react-native-firebase/storage';
 import firebase from 'firebase/compat';
 import {initializeApp} from 'firebase/app';
 
@@ -11,25 +11,18 @@ export const AddItemScreen: FunctionComponent = ({navigation, route}) => {
   const [title, setTitle] = useState('');
 
   const uploadItem = async () => {
-    const firebaseConfig = {
-      apiKey: 'AIzaSyAMcinCrj5Ni0bisbH5OsnkTUonNmrvmHk',
-      authDomain: 'foodex-11922175.firebaseapp.com',
-      projectId: 'foodex-11922175',
-      storageBucket: 'foodex-11922175.appspot.com',
-      messagingSenderId: '950757213853',
-      appId: '1:950757213853:web:5785e8f199718050ddb674',
-    };
 
-    const app = initializeApp(firebaseConfig);
-
-    const uploadUri = 'file://' + route.params.data.path;
-    let filename = uploadUri.substring(uploadUri.lastIndexOf('/') + 1);
-    try {
-      await storage().ref(filename).putFile(uploadUri);
-    } catch (e) {
-      console.log(e);
-    }
   };
+
+
+  //   const uploadUri = 'file://' + route.params.data.path;
+  //   let filename = uploadUri.substring(uploadUri.lastIndexOf('/') + 1);
+  //   try {
+  //     await storage().ref(filename).putFile(uploadUri);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   return (
     <sc.AddItemScreen>

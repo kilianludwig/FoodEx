@@ -10,6 +10,10 @@ import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 import java.util.List;
 
+// !!! ADDED FOR NAVIGATION !!!
+// https://reactnavigation.org/docs/getting-started/
+import android.os.Bundle;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
