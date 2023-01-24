@@ -4,7 +4,10 @@ import {Text, View} from 'react-native';
 
 export const ProfileCard = styled(Card)`
   background-color: ${props => props.theme.colors.bg.primary};
-  margin: ${props => props.theme.space[3]};
+  margin-top: ${props => props.theme.space[3]};
+  margin-right: ${props => props.theme.space[3]};
+  margin-left: ${props => props.theme.space[3]};
+
 `;
 
 export const UserInfoWrapper = styled(View)`

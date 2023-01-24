@@ -1,7 +1,5 @@
 import * as React from 'react';
 import * as sc from './/RequestCard.sc';
-import {MainButton} from '../MainButton/MainButton';
-import {View} from 'react-native';
 
 interface RequestProps {
   sender_id?: string;
@@ -19,14 +17,15 @@ export const RequestCard: React.FunctionComponent<RequestProps> = ({
   sender_name,
   item_name,
 }) => {
+  const message: String =
+    {sender_name} + 'would like to pick up your' + {item_name};
+
   return (
     <sc.RequestCard>
       <sc.DetailsWrapper>
         <sc.Picture source={require('../../assets/images/profile.jpg')} />
         <sc.TextWrapper>
-          <sc.TextInfo>
-            {sender_name} would like to pick up your {item_name}
-          </sc.TextInfo>
+          <sc.TextInfo> {message} </sc.TextInfo>
         </sc.TextWrapper>
       </sc.DetailsWrapper>
       <sc.ButtonsWrapper>

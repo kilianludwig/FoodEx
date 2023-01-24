@@ -9,5 +9,5 @@ export const ItemScreen = styled(View)`
 export const RequestButtonContainer = styled(View)`
   flex: 1;
   flex-direction: column-reverse;
-  padding-bottom: ${(props: {theme: {space: any[]}}) => props.theme.space[3]};
+  padding-bottom: ${(props: {theme: {space: any[]}}) => props.theme.space[1]};
 `;
