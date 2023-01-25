@@ -6,12 +6,11 @@ import {MainButton} from '../../components/MainButton/MainButton';
 import {RequestButtonContainer} from './ItemScreen.sc';
 
 export const ItemScreen = ({navigation, route}) => {
-  console.log(route);
   return (
     <sc.ItemScreen>
       {/*TODO Get right user & Item ID based*/}
       <UserCard></UserCard>
-      <ListItem item={route.params} />
+      <ListItem item={route.params.data} />
       <sc.RequestButtonContainer>
         <MainButton
           onPress={() => navigation.navigate('ListScreen')}

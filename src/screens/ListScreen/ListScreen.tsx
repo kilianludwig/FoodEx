@@ -64,7 +64,7 @@ export const ListScreen = ({navigation}) => {
         renderItem={({item}) => (
           <ListItem
             item={item}
-            onPress={navigation.navigate('ItemScreen', {data: item})}
+            onPress={() => navigation.navigate('ItemScreen', {data: item})}
           />
         )}
         keyExtractor={item => item.itemID}
