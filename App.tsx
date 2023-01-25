@@ -1,5 +1,4 @@
 import React from 'react';
-import {SafeArea} from './src/utils/SafeArea/SafeArea';
 import {ThemeProvider} from 'styled-components';
 import {theme} from './src/infrastructure/theme';
 import {initializeApp} from 'firebase/app';
