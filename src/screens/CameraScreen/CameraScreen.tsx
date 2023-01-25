@@ -26,11 +26,11 @@ export const CameraScreen = ({navigation}) => {
         throw new Error('Camera Ref is Null');
       }
 
-      console.log('Taking Picture...');
+      // console.log('Taking Picture...');
 
       const photo = await cameraRef.current.takePhoto({});
 
-      console.log(photo);
+      // console.log(photo);
 
       navigation.navigate('AddItemScreen', {data: photo});
     } catch (error) {

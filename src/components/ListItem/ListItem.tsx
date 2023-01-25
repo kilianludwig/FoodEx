@@ -3,36 +3,25 @@ import * as sc from './ListItem.sc';
 import {FadeInView} from '../../utils/Animations/fade.animation';
 
 interface ListItemProps {
-  id?: string;
-  title: string;
-  distance: string;
-  expiration: string;
-  image?: string;
-  onPress?: (id: string) => void;
+  item: any;
+  onPress?: () => void;
 }
 
 export const ListItem: React.FunctionComponent<ListItemProps> = ({
-  id,
-  title,
-  distance,
-  expiration,
+  item,
   onPress,
-  image, // TODO make flexible (Next JS)
 }) => {
   return (
     <FadeInView>
-      <sc.ItemCard elevation={2} onPress={() => onPress?.(id)}>
-        <sc.ItemCardCover
-          key={id}
-          source={require('../../assets/images/banana.jpg')}
-        />
+      <sc.ItemCard elevation={2} onPress={onPress}>
+        <sc.ItemCardCover key={item.itemID} source={{uri: item.image}} />
         <sc.ItemCardInfoWrapper>
           <sc.ItemCardTitleWrapper>
-            <sc.ItemCardTitle>{title}</sc.ItemCardTitle>
+            <sc.ItemCardTitle>{item.title}</sc.ItemCardTitle>
           </sc.ItemCardTitleWrapper>
           <sc.ItemCardDetailsWrapper>
-            <sc.ItemCardDetails>{distance} km</sc.ItemCardDetails>
-            <sc.ItemCardDetails>{expiration}</sc.ItemCardDetails>
+            <sc.ItemCardDetails>{item.location}</sc.ItemCardDetails>
+            <sc.ItemCardDetails>{item.expiration}</sc.ItemCardDetails>
           </sc.ItemCardDetailsWrapper>
         </sc.ItemCardInfoWrapper>
       </sc.ItemCard>

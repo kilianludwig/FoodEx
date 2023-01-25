@@ -14,7 +14,7 @@ export const AddItemScreen: FunctionComponent = ({navigation, route}) => {
 
   const [expiration, setExpiration] = useState('');
   const [title, setTitle] = useState('');
-  const [location, setLocation] = useState('no_location');
+  const [location, setLocation] = useState('Linz');
 
   const [uploading, setUploading] = useState(false);
 

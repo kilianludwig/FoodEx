@@ -1,23 +1,57 @@
 import * as sc from './ListScreen.sc';
 import {Button, FlatList} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {MainButton} from '../../components/MainButton/MainButton';
-import {ITEM_DATA} from '../../assets/database/item_data';
 import {ListItem} from '../../components/ListItem/ListItem';
-
-// TODO Use a Banner from rn paper to hide search bar and sort options
+import firestore from '@react-native-firebase/firestore';
+import firebase from 'firebase/compat';
 
 export const ListScreen = ({navigation}) => {
-  const renderItem = ({item}: any) => (
-    <ListItem
-      id={item.id}
-      title={item.title}
-      distance={item.distance}
-      expiration={item.expiration}
-      onPress={id => navigation.navigate('ItemScreen')}
-      image={item.image}
-    />
-  );
+  // hold all item data
+  const [items, setItems] = useState(null);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const list = [];
+
+        await firestore()
+          .collection('Items')
+          .get()
+          .then(QuerySnapshot => {
+            // console.log(QuerySnapshot.size);
+            QuerySnapshot.forEach(doc => {
+              const {itemID, userID, image, title, expiration, location} =
+                doc.data();
+              list.push({
+                itemID: itemID,
+                userID: userID,
+                image: image,
+                title: title,
+                expiration: expiration,
+                location: location,
+              });
+            });
+          });
+
+        setItems(list);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchItems();
+  }, []);
+
+  // const renderItem = ({item}: any) => (
+  //   <ListItem
+  //     id={item.id}
+  //     title={item.title}
+  //     distance={item.distance}
+  //     expiration={item.expiration}
+  //     onPress={id => navigation.navigate('ItemScreen')}
+  //     image={item.image}
+  //   />
+  // );
 
   return (
     <sc.ListScreen>
@@ -26,9 +60,9 @@ export const ListScreen = ({navigation}) => {
         onPress={() => navigation.navigate('SearchScreen')}
       />
       <FlatList
-        data={ITEM_DATA}
-        renderItem={item => renderItem(item)}
-        keyExtractor={item => item.id}
+        data={items}
+        renderItem={({item}) => <ListItem item={item} />}
+        keyExtractor={item => item.itemID}
       />
       <MainButton
         title={'Profile'}
