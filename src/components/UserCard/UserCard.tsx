@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as sc from './/UserCard.sc';
-import {RatingBar} from '../RatingBar/RatingBar';
+// import {RatingBar} from '../RatingBar/RatingBar';
 import {USER_DATA} from '../../assets/database/user_data';
 
 interface UserProps {
@@ -30,7 +30,7 @@ export const UserCard: React.FunctionComponent<UserProps> = ({
         </sc.UsernameWrapper>
         <sc.UserDetailsWrapper>
           <sc.Username>@{USER_DATA[0].username}</sc.Username>
-          <RatingBar rating={USER_DATA[0].rating} />
+          {/*<RatingBar rating={USER_DATA[0].rating} />*/}
           <sc.Location>{USER_DATA[0].location}</sc.Location>
         </sc.UserDetailsWrapper>
       </sc.UserInfoWrapper>
