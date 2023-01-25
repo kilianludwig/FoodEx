@@ -7,7 +7,6 @@ export const ProfileCard = styled(Card)`
   margin-top: ${props => props.theme.space[3]};
   margin-right: ${props => props.theme.space[3]};
   margin-left: ${props => props.theme.space[3]};
-
 `;
 
 export const UserInfoWrapper = styled(View)`
@@ -26,22 +25,24 @@ export const UsernameWrapper = styled(View)`
 `;
 
 export const Name = styled(Text)`
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 26px;
+  font-weight: 700;
   color: ${props => props.theme.colors.ui.primary};
-  margin-bottom: 5px;
-`;
-
-export const Username = styled(Text)`
-  font-size: 18px;
-  font-weight: 500;
-  color: ${props => props.theme.colors.ui.primary};
+  margin-bottom: 12px;
 `;
 
 export const Location = styled(Text)`
   font-size: 18px;
   font-weight: 500;
   color: ${props => props.theme.colors.ui.primary};
+  margin-bottom: ${props => props.theme.space[1]};
+`;
+
+export const Phone = styled(Text)`
+  font-size: 18px;
+  font-weight: 500;
+  color: ${props => props.theme.colors.ui.primary};
+  margin-bottom: ${props => props.theme.space[3]};
 `;
 
 export const UserPicture = styled(Card.Cover)`

@@ -61,7 +61,12 @@ export const ListScreen = ({navigation}) => {
       />
       <FlatList
         data={items}
-        renderItem={({item}) => <ListItem item={item} />}
+        renderItem={({item}) => (
+          <ListItem
+            item={item}
+            onPress={navigation.navigate('ItemScreen', {data: item})}
+          />
+        )}
         keyExtractor={item => item.itemID}
       />
       <MainButton

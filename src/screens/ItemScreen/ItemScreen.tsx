@@ -5,11 +5,13 @@ import {UserCard} from '../../components/UserCard/UserCard';
 import {MainButton} from '../../components/MainButton/MainButton';
 import {RequestButtonContainer} from './ItemScreen.sc';
 
-export const ItemScreen = ({navigation}) => {
+export const ItemScreen = ({navigation, route}) => {
+  console.log(route);
   return (
     <sc.ItemScreen>
+      {/*TODO Get right user & Item ID based*/}
       <UserCard></UserCard>
-      <ListItem title={'Banana'} distance={'0.3'} expiration={'10.04.23'} />
+      <ListItem item={route.params} />
       <sc.RequestButtonContainer>
         <MainButton
           onPress={() => navigation.navigate('ListScreen')}

@@ -17,15 +17,14 @@ export const RequestCard: React.FunctionComponent<RequestProps> = ({
   sender_name,
   item_name,
 }) => {
-  const message: String =
-    {sender_name} + 'would like to pick up your' + {item_name};
-
   return (
     <sc.RequestCard>
       <sc.DetailsWrapper>
         <sc.Picture source={require('../../assets/images/profile.jpg')} />
         <sc.TextWrapper>
-          <sc.TextInfo> {message} </sc.TextInfo>
+          <sc.TextInfo>
+            {sender_name}... would like to pick up your ...{item_name}
+          </sc.TextInfo>
         </sc.TextWrapper>
       </sc.DetailsWrapper>
       <sc.ButtonsWrapper>

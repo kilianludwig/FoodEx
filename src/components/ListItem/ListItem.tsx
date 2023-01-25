@@ -20,8 +20,8 @@ export const ListItem: React.FunctionComponent<ListItemProps> = ({
             <sc.ItemCardTitle>{item.title}</sc.ItemCardTitle>
           </sc.ItemCardTitleWrapper>
           <sc.ItemCardDetailsWrapper>
-            <sc.ItemCardDetails>{item.location}</sc.ItemCardDetails>
             <sc.ItemCardDetails>{item.expiration}</sc.ItemCardDetails>
+            <sc.ItemCardDetails>{item.location}</sc.ItemCardDetails>
           </sc.ItemCardDetailsWrapper>
         </sc.ItemCardInfoWrapper>
       </sc.ItemCard>
