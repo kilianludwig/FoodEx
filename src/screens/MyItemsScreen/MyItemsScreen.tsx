@@ -6,17 +6,26 @@ import {FlatList} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import {AuthenticationContext} from '../../services/authentication/authentication.context';
 
+export type listItem = {
+  itemID: string;
+  userID: string;
+  image: string;
+  title: string;
+  expiration: string;
+  location: string;
+};
+
 export const MyItemsScreen = ({navigation}) => {
   const {user} = useContext(AuthenticationContext);
 
-  const [items, setItems] = useState(null);
+  const [items, setItems] = useState<listItem[] | undefined>(undefined);
 
   console.log(user.userID);
 
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const list = [];
+        const list: listItem[] = [];
 
         await firestore()
           .collection('Items')
