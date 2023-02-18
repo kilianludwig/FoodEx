@@ -2,7 +2,7 @@ import * as sc from './/MyItemsScreen.sc';
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {MainButton} from '../../components/MainButton/MainButton';
 import {ListItem} from '../../components/ListItem/ListItem';
-import {FlatList, RefreshControl} from 'react-native';
+import {Alert, FlatList, RefreshControl} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import {AuthenticationContext} from '../../services/authentication/authentication.context';
 import {listItem} from '../ListScreen/ListScreen';
@@ -12,8 +12,6 @@ export const MyItemsScreen = ({navigation}) => {
   const currUserId = authContext.user ? authContext.user.uid : null;
 
   const [items, setItems] = useState<listItem[] | undefined>(undefined);
-
-  console.log(currUserId);
 
   const fetchItems = async (userId: string) => {
     try {

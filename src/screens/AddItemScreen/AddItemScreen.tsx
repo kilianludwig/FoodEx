@@ -69,12 +69,6 @@ export const AddItemScreen: FunctionComponent = ({navigation, route}) => {
     const imgUrl = await uploadImage();
     const itemID = generateNewID();
 
-    // console.log(user.uid);
-    // console.log(imgUrl);
-    // console.log(title);
-    // console.log(expiration);
-    // console.log(imgUrl + '_item');
-
     firestore()
       .collection('Items')
       .add({
@@ -84,6 +78,7 @@ export const AddItemScreen: FunctionComponent = ({navigation, route}) => {
         title: title,
         expiration: expiration,
         location: location,
+        postTime: firestore.Timestamp.fromDate(new Date()),
       })
       .then(() => {
         Alert.alert(`${title} Upload Done!`, 'Your food is now online! :)');
