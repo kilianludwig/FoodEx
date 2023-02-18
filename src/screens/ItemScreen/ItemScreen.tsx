@@ -4,7 +4,7 @@ import {ListItem} from '../../components/ListItem/ListItem';
 import {UserCard} from '../../components/UserCard/UserCard';
 import {MainButton} from '../../components/MainButton/MainButton';
 import firestore from '@react-native-firebase/firestore';
-import {ActivityIndicator, Alert} from 'react-native';
+import {ActivityIndicator, Alert, TouchableOpacity} from 'react-native';
 import {AuthenticationContext} from '../../services/authentication/authentication.context';
 import storage from '@react-native-firebase/storage';
 
@@ -95,10 +95,12 @@ export const ItemScreen = ({navigation, route}) => {
       ) : (
         <sc.ButtonContainer>
           {route.params.data.userID == currUserId ? (
-            <MainButton
-              onPress={() => handleDelete(route.params.data.itemID)}
-              title={'Delete Item'}
-            />
+            <TouchableOpacity
+              onPress={() => handleDelete(route.params.data.itemID)}>
+              <sc.DeleteButton elevation={1}>
+                <sc.DeleteButtonTitle>Delete Item</sc.DeleteButtonTitle>
+              </sc.DeleteButton>
+            </TouchableOpacity>
           ) : (
             <MainButton
               onPress={() => navigation.navigate('ListScreen')}

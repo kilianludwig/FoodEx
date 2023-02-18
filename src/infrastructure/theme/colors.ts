@@ -16,7 +16,9 @@ export const colors = {
   bg: {
     primary: '#FFFFFF',
     secondary: '#F1F1F1',
-    test: '#FFC500', //for testing purposes only
+    third: '#ffef9e',
+    negative: '#ffc7c7',
+    positive: '#baff9e',
   },
   text: {
     primary: '#262626',

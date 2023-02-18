@@ -4,7 +4,7 @@ import {UserCard} from '../../components/UserCard/UserCard';
 import {MainButton} from '../../components/MainButton/MainButton';
 import {AuthenticationContext} from '../../services/authentication/authentication.context';
 import {Spacer} from '../../utils/Spacer/Spacer';
-import {Alert} from 'react-native';
+import {Alert, TouchableOpacity} from 'react-native';
 
 export const ProfileScreen = ({navigation}) => {
   const {onLogout} = useContext(AuthenticationContext);
@@ -46,7 +46,11 @@ export const ProfileScreen = ({navigation}) => {
         onPress={() => navigation.navigate('SettingsScreen')}
       />
       <sc.LogOutButtonContainer>
-        <MainButton title={'Log Out'} onPress={handleLogout} />
+        <TouchableOpacity onPress={handleLogout}>
+          <sc.LogOutButton elevation={1}>
+            <sc.LogOutButtonTitle>Log Out</sc.LogOutButtonTitle>
+          </sc.LogOutButton>
+        </TouchableOpacity>
       </sc.LogOutButtonContainer>
     </sc.ProfileScreen>
   );
