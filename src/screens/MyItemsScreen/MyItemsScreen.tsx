@@ -19,15 +19,15 @@ export const MyItemsScreen = ({navigation}) => {
 
       await firestore()
         .collection('Items')
+        .orderBy('postTime', 'desc')
         .where('userID', '==', userId)
         .get()
         .then(QuerySnapshot => {
           // console.log(QuerySnapshot.size);
           QuerySnapshot.forEach(doc => {
-            const {itemID, userID, image, title, expiration, location} =
-              doc.data();
+            const {userID, image, title, expiration, location} = doc.data();
             list.push({
-              itemID: itemID,
+              itemID: doc.id,
               userID: userID,
               image: image,
               title: title,

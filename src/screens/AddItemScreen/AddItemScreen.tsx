@@ -67,12 +67,11 @@ export const AddItemScreen: FunctionComponent = ({navigation, route}) => {
 
   const uploadItem = async () => {
     const imgUrl = await uploadImage();
-    const itemID = generateNewID();
+    // const itemID = generateNewID();
 
     firestore()
       .collection('Items')
       .add({
-        itemID: itemID,
         userID: user.uid,
         image: imgUrl,
         title: title,
@@ -81,16 +80,20 @@ export const AddItemScreen: FunctionComponent = ({navigation, route}) => {
         postTime: firestore.Timestamp.fromDate(new Date()),
       })
       .then(() => {
-        Alert.alert(`${title} Upload Done!`, 'Your food is now online! :)');
+        Alert.alert(
+          `${title} upload successful!`,
+          'Your food is now online! :)',
+        );
         setTimeout(() => {
           navigation.navigate('MyItemsScreen');
-        }, 1000);
+        }, 500);
       })
       .catch(error => {
         console.log(error);
       });
   };
 
+  // unused, id is handled by firebase now
   function generateNewID(): string {
     const possibleCharacters =
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
