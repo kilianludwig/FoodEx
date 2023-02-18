@@ -1,58 +1,59 @@
 import * as sc from './/MyItemsScreen.sc';
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {MainButton} from '../../components/MainButton/MainButton';
 import {ListItem} from '../../components/ListItem/ListItem';
-import {FlatList} from 'react-native';
+import {FlatList, RefreshControl} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import {AuthenticationContext} from '../../services/authentication/authentication.context';
-
-export type listItem = {
-  itemID: string;
-  userID: string;
-  image: string;
-  title: string;
-  expiration: string;
-  location: string;
-};
+import {listItem} from '../ListScreen/ListScreen';
 
 export const MyItemsScreen = ({navigation}) => {
-  const {user} = useContext(AuthenticationContext);
+  const authContext = useContext(AuthenticationContext);
+  const currUserId = authContext.user ? authContext.user.uid : null;
 
   const [items, setItems] = useState<listItem[] | undefined>(undefined);
 
-  console.log(user.userID);
+  console.log(currUserId);
 
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const list: listItem[] = [];
+  const fetchItems = async (userId: string) => {
+    try {
+      const list: listItem[] = [];
 
-        await firestore()
-          .collection('Items')
-          .where('userID', '==', user.userID)
-          .get()
-          .then(QuerySnapshot => {
-            // console.log(QuerySnapshot.size);
-            QuerySnapshot.forEach(doc => {
-              const {itemID, userID, image, title, expiration, location} =
-                doc.data();
-              list.push({
-                itemID: itemID,
-                userID: userID,
-                image: image,
-                title: title,
-                expiration: expiration,
-                location: location,
-              });
+      await firestore()
+        .collection('Items')
+        .where('userID', '==', userId)
+        .get()
+        .then(QuerySnapshot => {
+          // console.log(QuerySnapshot.size);
+          QuerySnapshot.forEach(doc => {
+            const {itemID, userID, image, title, expiration, location} =
+              doc.data();
+            list.push({
+              itemID: itemID,
+              userID: userID,
+              image: image,
+              title: title,
+              expiration: expiration,
+              location: location,
             });
           });
+        });
+      setItems(list);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-        setItems(list);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    fetchItems();
+  useEffect(() => {
+    fetchItems(currUserId);
+  }, []);
+
+  // Pull-down-to-refresh functionality
+  const [refreshing, setRefreshing] = useState(false);
+  const refreshData = useCallback(() => {
+    setRefreshing(true);
+    fetchItems(currUserId);
+    setRefreshing(false);
   }, []);
 
   return (
@@ -63,10 +64,16 @@ export const MyItemsScreen = ({navigation}) => {
       />
       <FlatList
         data={items}
+        keyExtractor={item => item.itemID}
         renderItem={({item}) => (
-          <ListItem item={item} onPress={navigation.navigate('ItemScreen')} />
+          <ListItem
+            item={item}
+            onPress={() => navigation.navigate('ItemScreen', {data: item})}
+          />
         )}
-        keyExtractor={item => item.userID}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={refreshData} />
+        }
       />
     </sc.MyItemsScreen>
   );

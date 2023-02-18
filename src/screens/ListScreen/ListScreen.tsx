@@ -5,13 +5,22 @@ import {MainButton} from '../../components/MainButton/MainButton';
 import {ListItem} from '../../components/ListItem/ListItem';
 import firestore from '@react-native-firebase/firestore';
 
+export type listItem = {
+  itemID: string;
+  userID: string;
+  image: string;
+  title: string;
+  expiration: string;
+  location: string;
+};
+
 export const ListScreen = ({navigation}) => {
   // hold all item data
-  const [items, setItems] = useState(null);
+  const [items, setItems] = useState<listItem[] | undefined>(undefined);
 
   const fetchItems = async () => {
     try {
-      const list = [];
+      const list: listItem[] = [];
 
       await firestore()
         .collection('Items')
@@ -42,9 +51,7 @@ export const ListScreen = ({navigation}) => {
   }, []);
 
   // Pull-down-to-refresh functionality
-
   const [refreshing, setRefreshing] = useState(false);
-
   const refreshData = useCallback(() => {
     setRefreshing(true);
     fetchItems();
