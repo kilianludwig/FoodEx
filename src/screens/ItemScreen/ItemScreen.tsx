@@ -84,6 +84,27 @@ export const ItemScreen = ({navigation, route}) => {
   // console.log('route.params.data.itemID');
   // console.log(route.params.data.itemID);
 
+  const sendRequest = async () => {
+    firestore()
+      .collection('Requests')
+      .add({
+        senderID: currUserId,
+        receiverID: route.params.data.userID,
+        itemID: route.params.data.itemID,
+        requestTime: firestore.Timestamp.fromDate(new Date()),
+      })
+      .then(() => {
+        Alert.alert(`Request successful!`, '');
+        console.log(route.params.data);
+        //setTimeout(() => {
+        //  navigation.navigate('MyItemsScreen');
+        //}, 500);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   return (
     <sc.ItemScreen>
       <UserCard></UserCard>
@@ -103,7 +124,7 @@ export const ItemScreen = ({navigation, route}) => {
             </TouchableOpacity>
           ) : (
             <MainButton
-              onPress={() => navigation.navigate('ListScreen')}
+              onPress={() => sendRequest()}
               title={'Request Pick-Up'}
             />
           )}
