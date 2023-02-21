@@ -13,6 +13,7 @@ export type requestItem = {
   receiverID: string;
   itemID: string;
   requestTime: string;
+  itemName: string;
 };
 
 export const RequestsScreen = ({navigation}) => {
@@ -26,24 +27,27 @@ export const RequestsScreen = ({navigation}) => {
     try {
       const requests: requestItem[] = [];
 
-      await firestore()
+      const requestsSnapshot = await firestore()
         .collection('Requests')
         .orderBy('requestTime', 'desc')
         .where('receiverID', '==', userId)
-        .get()
-        .then(QuerySnapshot => {
-          // console.log(QuerySnapshot.size);
-          QuerySnapshot.forEach(doc => {
-            const {senderID, receiverID, itemID, requestTime} = doc.data();
-            requests.push({
-              requestID: doc.id,
-              senderID: senderID,
-              receiverID: receiverID,
-              itemID: itemID,
-              requestTime: requestTime,
-            });
-          });
-        });
+        .get();
+
+      for (const requestDoc of requestsSnapshot.docs) {
+        const request = requestDoc.data() as requestItem;
+        const itemDoc = await firestore()
+          .collection('Items')
+          .doc(request.itemID)
+          .get();
+        const itemName = itemDoc.data()?.title;
+        const updatedRequest = {
+          ...request,
+          requestID: requestDoc.id,
+          itemName: itemName,
+        };
+        console.log(updatedRequest);
+        requests.push(updatedRequest);
+      }
       setRequests(requests);
     } catch (e) {
       console.log(e);
@@ -59,7 +63,6 @@ export const RequestsScreen = ({navigation}) => {
   const refreshData = useCallback(() => {
     setRefreshing(true);
     fetchRequests(currUserId);
-    console.log(requests);
     setRefreshing(false);
   }, []);
 
@@ -67,7 +70,6 @@ export const RequestsScreen = ({navigation}) => {
     <sc.RequestsScreen>
       <FlatList
         data={requests}
-        // TODO get requestID here
         keyExtractor={request => request.requestID}
         renderItem={({item}) => <RequestCard request={item} />}
         refreshControl={
