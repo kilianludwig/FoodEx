@@ -2,7 +2,7 @@ import * as sc from './/MyItemsScreen.sc';
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {MainButton} from '../../components/MainButton/MainButton';
 import {ListItem} from '../../components/ListItem/ListItem';
-import {Alert, FlatList, RefreshControl} from 'react-native';
+import {Alert, FlatList, RefreshControl, TouchableOpacity} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import {AuthenticationContext} from '../../services/authentication/authentication.context';
 import {listItem} from '../ListScreen/ListScreen';
@@ -56,10 +56,13 @@ export const MyItemsScreen = ({navigation}) => {
 
   return (
     <sc.MyItemsScreen>
-      <MainButton
-        title={'Add Item'}
-        onPress={() => navigation.navigate('CameraScreen')}
-      />
+      <sc.ButtonContainer>
+        <TouchableOpacity onPress={() => navigation.navigate('CameraScreen')}>
+          <sc.RoundButton elevation={1}>
+            <sc.RoundButtonTitle>+</sc.RoundButtonTitle>
+          </sc.RoundButton>
+        </TouchableOpacity>
+      </sc.ButtonContainer>
       <FlatList
         data={items}
         keyExtractor={item => item.itemID}

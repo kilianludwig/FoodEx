@@ -1,5 +1,5 @@
 import * as sc from './ListScreen.sc';
-import {FlatList, RefreshControl} from 'react-native';
+import {FlatList, RefreshControl, TouchableOpacity} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import {MainButton} from '../../components/MainButton/MainButton';
 import {ListItem} from '../../components/ListItem/ListItem';
@@ -79,10 +79,13 @@ export const ListScreen = ({navigation}) => {
           <RefreshControl refreshing={refreshing} onRefresh={refreshData} />
         }
       />
-      <MainButton
-        title={'Profile'}
-        onPress={() => navigation.navigate('ProfileScreen')}
-      />
+      <sc.ButtonContainer>
+        <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
+          <sc.RoundButton elevation={1}>
+            <sc.RoundButtonTitle>P</sc.RoundButtonTitle>
+          </sc.RoundButton>
+        </TouchableOpacity>
+      </sc.ButtonContainer>
     </sc.ListScreen>
   );
 };

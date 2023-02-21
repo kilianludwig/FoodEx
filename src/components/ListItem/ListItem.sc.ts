@@ -26,7 +26,7 @@ export const ItemCardTitleWrapper = styled(View)`
 `;
 
 export const ItemCardTitle = styled(Text)`
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 600;
   color: ${props => props.theme.colors.ui.primary};
   margin-left: ${props => props.theme.space[2]};
@@ -38,8 +38,9 @@ export const ItemCardDetailsWrapper = styled(View)`
 
 export const ItemCardDetails = styled(Text)`
   text-align: right;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   color: ${props => props.theme.colors.ui.primary};
   margin-right: ${props => props.theme.space[1]};
+  margin-bottom: ${props => props.theme.space[1]};
 `;

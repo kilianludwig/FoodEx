@@ -1,4 +1,4 @@
-import {StyleSheet, View, Text, Linking} from 'react-native';
+import {StyleSheet, View, Text, Linking, TouchableOpacity} from 'react-native';
 import {Camera, useCameraDevices} from 'react-native-vision-camera';
 import React, {useRef} from 'react';
 import * as sc from './CameraScreen.sc';
@@ -56,7 +56,11 @@ export const CameraScreen = ({navigation}) => {
         photo={true}
       />
       <sc.ButtonContainer>
-        <sc.CameraButton title={'X'} onPress={takePicture} />
+        <TouchableOpacity onPress={takePicture}>
+          <sc.CameraButton>
+            <sc.Title>O</sc.Title>
+          </sc.CameraButton>
+        </TouchableOpacity>
       </sc.ButtonContainer>
     </>
   );
