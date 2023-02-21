@@ -56,6 +56,7 @@ export const ListScreen = ({navigation}) => {
   const refreshData = useCallback(() => {
     setRefreshing(true);
     fetchItems();
+    console.log(items);
     setRefreshing(false);
   }, []);
 

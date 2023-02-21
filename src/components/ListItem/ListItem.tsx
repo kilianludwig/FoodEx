@@ -1,7 +1,7 @@
 import React from 'react';
 import * as sc from './ListItem.sc';
 import {FadeInView} from '../../utils/Animations/fade.animation';
-import {listItem} from '../../screens/MyItemsScreen/MyItemsScreen';
+import {listItem} from '../../screens/ListScreen/ListScreen';
 
 interface ListItemProps {
   item: listItem;

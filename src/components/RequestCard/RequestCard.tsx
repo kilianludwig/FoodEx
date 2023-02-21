@@ -1,21 +1,13 @@
 import * as React from 'react';
 import * as sc from './/RequestCard.sc';
+import {requestItem} from '../../screens/RequestsScreen/RequestsScreen';
 
 interface RequestProps {
-  sender_id?: string;
-  receiver_id?: string;
-  item_id?: string;
-  // TODO Fetch names from IDs
-  sender_name: string;
-  item_name: string;
+  request: requestItem;
 }
 
 export const RequestCard: React.FunctionComponent<RequestProps> = ({
-  sender_id,
-  receiver_id,
-  item_id,
-  sender_name,
-  item_name,
+  request,
 }) => {
   return (
     <sc.RequestCard>
@@ -23,7 +15,7 @@ export const RequestCard: React.FunctionComponent<RequestProps> = ({
         <sc.Picture source={require('../../assets/images/profile.jpg')} />
         <sc.TextWrapper>
           <sc.TextInfo>
-            {sender_name}... would like to pick up your ...{item_name}
+            {request.senderID} would like to pick up your {request.itemID}
           </sc.TextInfo>
         </sc.TextWrapper>
       </sc.DetailsWrapper>
