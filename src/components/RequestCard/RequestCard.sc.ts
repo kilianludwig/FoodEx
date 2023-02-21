@@ -25,7 +25,7 @@ export const TextWrapper = styled(View)`
 `;
 
 export const TextInfo = styled(Text)`
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 500;
   color: ${props => props.theme.colors.ui.primary};
   margin-left: ${props => props.theme.space[2]};
@@ -41,7 +41,7 @@ export const Picture = styled(Card.Cover)`
 
 export const ButtonsWrapper = styled(View)`
   flex-direction: row;
-  margin-top: ${props => props.theme.space[2]};
+  margin-top: ${props => props.theme.space[3]};
 `;
 
 export const ButtonView = styled(View)`
@@ -63,7 +63,7 @@ export const DenyButton = styled(Button)`
 `;
 
 export const ButtonText = styled(Text)`
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   color: ${props => props.theme.colors.ui.tertiary};
 `;
