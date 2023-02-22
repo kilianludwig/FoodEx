@@ -4,7 +4,15 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   getAuth,
+  updateProfile,
 } from 'firebase/auth';
+
+import {doc, setDoc} from 'firebase/firestore';
+import {db} from '../../../App';
+
+// import doc from '@react-native-firebase/firestore';
+// import setDoc from '@react-native-firebase/firestore';
+// import db from '@react-native-firebase/firestore';
 
 import {loginRequest} from './authentication.service';
 
@@ -42,21 +50,47 @@ export const AuthenticationContextProvider = ({children}) => {
   const onRegister = (
     email: string,
     password: string,
-    repeatedPassword: any,
+    repeatedPassword: string,
+    name: string,
+    phoneNumber: string,
   ) => {
     setIsLoading(true);
     if (password !== repeatedPassword) {
       setError('Error: Passwords do not match');
+      setIsLoading(false);
       return;
     }
     createUserWithEmailAndPassword(auth, email, password)
-      .then(u => {
-        setUser(u);
-        setIsLoading(false);
+      .then(userCredential => {
+        const {user} = userCredential;
+        // Update the user's display name
+        if (user) {
+          updateProfile(user, {displayName: name})
+            .then(() => {
+              // Update the user's phone number
+              const userRef = doc(db, 'Users', user.uid);
+              setDoc(userRef, {phoneNumber: phoneNumber}, {merge: true})
+                .then(() => {
+                  setUser(user);
+                  setIsLoading(false);
+                })
+                .catch(error => {
+                  setIsLoading(false);
+                  setError(error.message);
+                });
+            })
+            .catch(error => {
+              setIsLoading(false);
+              setError(error.message);
+            });
+        } else {
+          setIsLoading(false);
+          setError('Error: User not found');
+        }
       })
-      .catch(e => {
+      .catch(error => {
         setIsLoading(false);
-        setError(e.toString());
+        setError(error.message);
       });
   };
 

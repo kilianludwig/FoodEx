@@ -5,6 +5,7 @@ import {initializeApp} from 'firebase/app';
 import firebase from 'firebase/compat';
 import {AuthenticationContextProvider} from './src/services/authentication/authentication.context';
 import {Navigation} from './src/infrastructure/navigation';
+import {getFirestore} from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAMcinCrj5Ni0bisbH5OsnkTUonNmrvmHk',
@@ -18,6 +19,11 @@ const firebaseConfig = {
 if (!firebase.apps.length) {
   const app = initializeApp(firebaseConfig);
 }
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+export {db};
 
 export default function App() {
   return (

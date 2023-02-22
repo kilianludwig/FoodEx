@@ -9,6 +9,8 @@ import {ActivityIndicator} from 'react-native-paper';
 export const RegisterScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
   const [repeatedPassword, setRepeatedPassword] = useState('');
   const {onRegister, isLoading, error} = useContext(AuthenticationContext);
   return (
@@ -27,7 +29,7 @@ export const RegisterScreen = ({navigation}) => {
           textContentType="emailAddress"
           keyboardType="email-address"
           autoCapitalize="none"
-          onChangeText={u => setEmail(u)}
+          onChangeText={e => setEmail(e)}
         />
         <Spacer size="medium">
           <sc.InputField
@@ -50,7 +52,30 @@ export const RegisterScreen = ({navigation}) => {
             textContentType="password"
             secureTextEntry
             autoCapitalize="none"
-            onChangeText={p => setRepeatedPassword(p)}
+            onChangeText={rp => setRepeatedPassword(rp)}
+          />
+        </Spacer>
+        <Spacer size="medium">
+          <sc.InputField
+            mode="outlined"
+            activeOutlineColor="black"
+            label="Name"
+            value={name}
+            textContentType="givenName"
+            autoCapitalize="none"
+            onChangeText={n => setName(n)}
+          />
+        </Spacer>
+        <Spacer size="medium">
+          <sc.InputField
+            mode="outlined"
+            activeOutlineColor="black"
+            label="Phone number"
+            value={number}
+            textContentType=""
+            keyboardType="phone-pad"
+            autoCapitalize="none"
+            onChangeText={num => setNumber(num)}
           />
         </Spacer>
         {error && (
@@ -63,7 +88,9 @@ export const RegisterScreen = ({navigation}) => {
             {!isLoading ? (
               <MainButton
                 title="Register"
-                onPress={() => onRegister(email, password, repeatedPassword)}
+                onPress={() =>
+                  onRegister(email, password, repeatedPassword, name, number)
+                }
               />
             ) : (
               <ActivityIndicator animating={true} />
