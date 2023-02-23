@@ -53,6 +53,7 @@ export const AuthenticationContextProvider = ({children}) => {
     repeatedPassword: string,
     name: string,
     phoneNumber: string,
+    address: string,
   ) => {
     setIsLoading(true);
     if (password !== repeatedPassword) {
@@ -69,7 +70,16 @@ export const AuthenticationContextProvider = ({children}) => {
             .then(() => {
               // Update the user's phone number
               const userRef = doc(db, 'Users', user.uid);
-              setDoc(userRef, {phoneNumber: phoneNumber}, {merge: true})
+              setDoc(
+                userRef,
+                {
+                  phoneNumber: phoneNumber,
+                  address: address,
+                  displayName: name,
+                  email: email,
+                },
+                {merge: true},
+              )
                 .then(() => {
                   setUser(user);
                   setIsLoading(false);

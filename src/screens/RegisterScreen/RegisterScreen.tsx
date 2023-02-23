@@ -11,6 +11,8 @@ export const RegisterScreen = ({navigation}) => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const [address, setAddress] = useState('');
+
   const [repeatedPassword, setRepeatedPassword] = useState('');
   const {onRegister, isLoading, error} = useContext(AuthenticationContext);
   return (
@@ -77,6 +79,16 @@ export const RegisterScreen = ({navigation}) => {
             onChangeText={num => setNumber(num)}
           />
         </Spacer>
+        <Spacer size="medium">
+          <sc.InputField
+            mode="outlined"
+            activeOutlineColor="black"
+            label="Address"
+            value={address}
+            autoCapitalize="none"
+            onChangeText={a => setAddress(a)}
+          />
+        </Spacer>
         {error && (
           <sc.ErrorContainer>
             <Text>{error}</Text>
@@ -88,7 +100,14 @@ export const RegisterScreen = ({navigation}) => {
               <MainButton
                 title="Register"
                 onPress={() =>
-                  onRegister(email, password, repeatedPassword, name, number)
+                  onRegister(
+                    email,
+                    password,
+                    repeatedPassword,
+                    name,
+                    number,
+                    address,
+                  )
                 }
               />
             ) : (

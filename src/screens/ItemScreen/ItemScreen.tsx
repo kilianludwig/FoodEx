@@ -1,7 +1,7 @@
 import * as sc from './ItemScreen.sc';
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {ListItem} from '../../components/ListItem/ListItem';
-import {UserCard} from '../../components/UserCard/UserCard';
+import {UserCard, userItem} from '../../components/UserCard/UserCard';
 import {MainButton} from '../../components/MainButton/MainButton';
 import firestore from '@react-native-firebase/firestore';
 import {ActivityIndicator, Alert, TouchableOpacity} from 'react-native';
@@ -14,6 +14,41 @@ export const ItemScreen = ({navigation, route}) => {
   const currUserName = authContext.user ? authContext.user.displayName : null;
 
   const [deleting, setDeleting] = useState(false);
+
+  console.log(route.params.data.userID);
+
+  const [chosenUser, setChosenUser] = useState<userItem>({
+    userID: route.params.data.userID,
+    fullName: '',
+    email: '',
+    address: '',
+    number: '',
+    picture: '',
+  });
+
+  useEffect(() => {
+    async function getUser(userUid: string) {
+      try {
+        const doc = await firestore().collection('Users').doc(userUid).get();
+        if (doc.exists) {
+          const userData = doc.data();
+          setChosenUser(prevUser => ({
+            ...prevUser,
+            fullName: userData.displayName,
+            email: userData.email,
+            address: userData.address,
+            number: userData.phoneNumber,
+            picture: userData.picture,
+          }));
+        } else {
+          console.log('User data not found');
+        }
+      } catch (error) {
+        console.log('Error retrieving user data:', error);
+      }
+    }
+    getUser(route.params.data.userID);
+  }, [route.params.data.userID]);
 
   const handleDelete = (itemID: string) => {
     Alert.alert(
@@ -110,7 +145,7 @@ export const ItemScreen = ({navigation, route}) => {
 
   return (
     <sc.ItemScreen>
-      <UserCard></UserCard>
+      <UserCard user={chosenUser}></UserCard>
       <ListItem item={route.params.data} />
       {deleting ? (
         <sc.ButtonContainer>
