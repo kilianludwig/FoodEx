@@ -85,13 +85,15 @@ export const RequestCard: React.FunctionComponent<RequestProps> = ({
   return (
     <sc.RequestCard>
       <sc.DetailsWrapper>
-        <sc.Picture source={require('../../assets/images/profile.jpg')} />
+        <sc.Picture source={{uri: request.itemImage}} />
         <sc.TextWrapper>
           <sc.TextInfo>
-            {request.senderID} would like to pick up your {request.itemName}.
+            {request.senderName} would like to pick up your {request.itemName}.
           </sc.TextInfo>
           <sc.TextInfo></sc.TextInfo>
-          <sc.TextInfo>Call him at ... before deciding.</sc.TextInfo>
+          <sc.TextInfo>
+            Call him at {request.senderNumber} before deciding.
+          </sc.TextInfo>
         </sc.TextWrapper>
       </sc.DetailsWrapper>
       <sc.ButtonsWrapper>

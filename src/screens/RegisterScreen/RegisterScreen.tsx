@@ -72,7 +72,6 @@ export const RegisterScreen = ({navigation}) => {
             activeOutlineColor="black"
             label="Phone number"
             value={number}
-            textContentType=""
             keyboardType="phone-pad"
             autoCapitalize="none"
             onChangeText={num => setNumber(num)}

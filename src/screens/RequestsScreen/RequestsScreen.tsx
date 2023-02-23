@@ -14,6 +14,9 @@ export type requestItem = {
   itemID: string;
   requestTime: string;
   itemName: string;
+  senderName: string;
+  senderNumber: string;
+  itemImage: string;
 };
 
 export const RequestsScreen = ({navigation}) => {
@@ -40,10 +43,20 @@ export const RequestsScreen = ({navigation}) => {
           .doc(request.itemID)
           .get();
         const itemName = itemDoc.data()?.title;
+        const itemImage = itemDoc.data()?.image;
+
+        const senderDoc = await firestore()
+          .collection('Users')
+          .doc(request.senderID)
+          .get();
+        const senderNumber = senderDoc.data()?.phoneNumber;
+
         const updatedRequest = {
           ...request,
           requestID: requestDoc.id,
           itemName: itemName,
+          senderNumber: senderNumber,
+          itemImage: itemImage,
         };
         console.log(updatedRequest);
         requests.push(updatedRequest);

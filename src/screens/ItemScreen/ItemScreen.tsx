@@ -11,6 +11,7 @@ import storage from '@react-native-firebase/storage';
 export const ItemScreen = ({navigation, route}) => {
   const authContext = useContext(AuthenticationContext);
   const currUserId = authContext.user ? authContext.user.uid : null;
+  const currUserName = authContext.user ? authContext.user.displayName : null;
 
   const [deleting, setDeleting] = useState(false);
 
@@ -89,6 +90,8 @@ export const ItemScreen = ({navigation, route}) => {
       .collection('Requests')
       .add({
         senderID: currUserId,
+        senderName: currUserName,
+        senderNumber: '000',
         receiverID: route.params.data.userID,
         itemID: route.params.data.itemID,
         requestTime: firestore.Timestamp.fromDate(new Date()),
