@@ -40,13 +40,13 @@ export const LocationInfoCard = styled(Card)`
   background-color: ${props => props.theme.colors.bg.primary};
   padding: ${props => props.theme.space[1]};
   margin-top: ${props => props.theme.space[4]};
+  width: 300px;
 `;
 
 export const LocationInfo = styled(View)`
-  padding: ${props => props.theme.space[2]};
   align-items: center;
   flex-direction: column;
-  padding: ${props => props.theme.space[4]};
+  padding: ${props => props.theme.space[3]};
 `;
 
 export const InputContainer = styled(View)`

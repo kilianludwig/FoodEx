@@ -171,10 +171,10 @@ export const AddItemScreen: FunctionComponent = ({navigation, route}) => {
       <sc.LocationInfoContainer>
         <sc.LocationInfoCard>
           <sc.LocationInfo>
-            <sc.TextInfo>Your Longitude is: {longitude}</sc.TextInfo>
-            <sc.TextInfo>Your Latitude is: {latitude}</sc.TextInfo>
-            <sc.TextInfo> </sc.TextInfo>
-            <sc.BigTextInfo>Location: {location}</sc.BigTextInfo>
+            <sc.TextInfo>Latitude: {latitude}</sc.TextInfo>
+            <sc.TextInfo>Longitude: {longitude}</sc.TextInfo>
+            {/*<sc.TextInfo> </sc.TextInfo>*/}
+            {/*<sc.BigTextInfo>Location: {location}</sc.BigTextInfo>*/}
           </sc.LocationInfo>
         </sc.LocationInfoCard>
       </sc.LocationInfoContainer>
