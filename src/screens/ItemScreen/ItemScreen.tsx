@@ -161,10 +161,11 @@ export const ItemScreen = ({navigation, route}) => {
               </sc.DeleteButton>
             </TouchableOpacity>
           ) : (
-            <MainButton
-              onPress={() => sendRequest()}
-              title={'Request Pick-Up'}
-            />
+            <TouchableOpacity onPress={() => sendRequest()}>
+              <sc.RequestButton elevation={1}>
+                <sc.RequestButtonTitle>Request Item</sc.RequestButtonTitle>
+              </sc.RequestButton>
+            </TouchableOpacity>
           )}
         </sc.ButtonContainer>
       )}

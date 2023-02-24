@@ -24,8 +24,8 @@ export const AddItemScreen: FunctionComponent = ({navigation, route}) => {
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('Altenberger Straße 69, Linz');
 
-  const [longitude, setLongitude] = useState('...');
-  const [latitude, setLatitude] = useState('...');
+  const [longitude, setLongitude] = useState('');
+  const [latitude, setLatitude] = useState('');
   // const [locationStatus, setLocationStatus] = useState('');
 
   const [uploading, setUploading] = useState(false);
@@ -77,10 +77,12 @@ export const AddItemScreen: FunctionComponent = ({navigation, route}) => {
         title: title,
         expiration: expiration,
         location: location,
+        longitude: longitude,
+        latitude: latitude,
         postTime: firestore.Timestamp.fromDate(new Date()),
       })
       .then(() => {
-        Alert.alert(`${title} upload successful!`, 'Your food is now online.');
+        Alert.alert(`${title} upload successful`, 'Your food is now online');
         setTimeout(() => {
           navigation.navigate('MyItemsScreen');
         }, 500);

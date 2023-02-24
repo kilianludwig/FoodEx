@@ -22,7 +22,7 @@ export const ListItem: React.FunctionComponent<ListItemProps> = ({
           </sc.ItemCardTitleWrapper>
           <sc.ItemCardDetailsWrapper>
             <sc.ItemCardDetails>{item.expiration}</sc.ItemCardDetails>
-            <sc.ItemCardDetails>{item.location}</sc.ItemCardDetails>
+            <sc.ItemCardDetails>{item.currDistance}</sc.ItemCardDetails>
           </sc.ItemCardDetailsWrapper>
         </sc.ItemCardInfoWrapper>
       </sc.ItemCard>

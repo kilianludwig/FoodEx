@@ -19,11 +19,11 @@ export const LogOutButtonContainer = styled(View)`
 `;
 
 export const LogOutButton = styled(MainButton)`
-  background-color: ${props => props.theme.colors.bg.negative};
+  background-color: ${props => props.theme.colors.bg.primary};
 `;
 
 export const LogOutButtonTitle = styled(Text)`
   font-size: 16px;
   font-weight: 500;
-  color: ${props => props.theme.colors.ui.primary};
+  color: ${props => props.theme.colors.ui.error};
 `;
