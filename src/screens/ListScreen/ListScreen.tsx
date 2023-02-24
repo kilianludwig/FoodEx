@@ -10,6 +10,7 @@ import {MainButton} from '../../components/MainButton/MainButton';
 import {ListItem} from '../../components/ListItem/ListItem';
 import firestore from '@react-native-firebase/firestore';
 import Geolocation from '@react-native-community/geolocation';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export type listItem = {
   itemID: string;
@@ -25,16 +26,14 @@ export const ListScreen = ({navigation}) => {
   // hold all item data
   const [items, setItems] = useState<listItem[] | undefined>(undefined);
 
-  const [currLongitude, setCurrLongitude] = useState('');
-  const [currLatitude, setCurrLatitude] = useState('');
+  const [currLatitude, setCurrLatitude] = useState('48');
+  const [currLongitude, setCurrLongitude] = useState('14');
 
   useEffect(() => {
     const requestLocationPermission = async () => {
-      if (Platform.OS === 'ios') {
-        getOneTimeLocation();
-      } else {
-      }
+      getOneTimeLocation();
     };
+
     requestLocationPermission();
     return () => {};
   });
@@ -81,13 +80,13 @@ export const ListScreen = ({navigation}) => {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
     const distance = R * c;
-    // console.log(lat1);
-    // console.log(lon1);
-    // console.log(lat2);
-    // console.log(lon2);
+    console.log(lat1);
+    console.log(lon1);
+    console.log(lat2);
+    console.log(lon2);
 
-    // console.log('distance');
-    // console.log(distance);
+    console.log('distance');
+    console.log(distance);
     return distance;
   }
 
@@ -114,12 +113,14 @@ export const ListScreen = ({navigation}) => {
               title: title,
               expiration: expiration,
               currDistance:
-                distance(
-                  parseInt(currLatitude),
-                  parseInt(currLongitude),
-                  parseInt(latitude),
-                  parseInt(longitude),
-                ).toString() + 'm',
+                Math.trunc(
+                  distance(
+                    parseInt(currLatitude),
+                    parseInt(currLongitude),
+                    parseInt(latitude),
+                    parseInt(longitude),
+                  ),
+                ).toString() + ' m',
             });
           });
         });
@@ -137,8 +138,9 @@ export const ListScreen = ({navigation}) => {
   const [refreshing, setRefreshing] = useState(false);
   const refreshData = useCallback(() => {
     setRefreshing(true);
+    getOneTimeLocation();
     fetchItems();
-    console.log(items);
+    // console.log(items);
     setRefreshing(false);
   }, []);
 
@@ -164,7 +166,7 @@ export const ListScreen = ({navigation}) => {
       <sc.ButtonContainer>
         <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
           <sc.RoundButton elevation={1}>
-            <sc.RoundButtonTitle>P</sc.RoundButtonTitle>
+            <sc.RoundButtonTitle>Profile</sc.RoundButtonTitle>
           </sc.RoundButton>
         </TouchableOpacity>
       </sc.ButtonContainer>
