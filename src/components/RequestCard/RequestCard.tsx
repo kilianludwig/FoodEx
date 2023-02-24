@@ -92,7 +92,7 @@ export const RequestCard: React.FunctionComponent<RequestProps> = ({
           </sc.TextInfo>
           <sc.TextInfo></sc.TextInfo>
           <sc.TextInfo>
-            Call him at {request.senderNumber} before deciding.
+            Call at {request.senderNumber} before deciding.
           </sc.TextInfo>
         </sc.TextWrapper>
       </sc.DetailsWrapper>

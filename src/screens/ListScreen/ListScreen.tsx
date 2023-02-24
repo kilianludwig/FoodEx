@@ -10,7 +10,6 @@ import {MainButton} from '../../components/MainButton/MainButton';
 import {ListItem} from '../../components/ListItem/ListItem';
 import firestore from '@react-native-firebase/firestore';
 import Geolocation from '@react-native-community/geolocation';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export type listItem = {
   itemID: string;
