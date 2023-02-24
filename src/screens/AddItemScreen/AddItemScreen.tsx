@@ -80,10 +80,7 @@ export const AddItemScreen: FunctionComponent = ({navigation, route}) => {
         postTime: firestore.Timestamp.fromDate(new Date()),
       })
       .then(() => {
-        Alert.alert(
-          `${title} upload successful!`,
-          'Your food is now online! :)',
-        );
+        Alert.alert(`${title} upload successful!`, 'Your food is now online.');
         setTimeout(() => {
           navigation.navigate('MyItemsScreen');
         }, 500);

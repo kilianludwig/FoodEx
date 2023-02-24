@@ -12,7 +12,7 @@ export type userItem = {
   email: string;
   address: string;
   number: string;
-  picture?: string;
+  picture: string;
 };
 
 interface UserProps {
@@ -23,10 +23,7 @@ export const UserCard: React.FunctionComponent<UserProps> = ({user}) => {
   return (
     <FadeInView>
       <sc.ProfileCard elevation={2}>
-        <sc.UserPicture
-          key={user.userID}
-          source={require('../../assets/images/profile.jpg')}
-        />
+        <sc.UserPicture key={user.userID} source={{uri: user.picture}} />
         <sc.UserInfoWrapper>
           <sc.UsernameWrapper>
             <sc.Name>{user.fullName}</sc.Name>

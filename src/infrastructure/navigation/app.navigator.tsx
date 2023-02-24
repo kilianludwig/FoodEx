@@ -10,6 +10,7 @@ import {AddItemScreen} from '../../screens/AddItemScreen/AddItemScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {SafeArea} from '../../utils/SafeArea/SafeArea';
 import {CameraScreen} from '../../screens/CameraScreen/CameraScreen';
+import {ProfileCamScreen} from '../../screens/ProfileCamScreen/ProfileCamScreen';
 
 const Stack = createNativeStackNavigator();
 

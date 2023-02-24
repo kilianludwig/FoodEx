@@ -54,6 +54,7 @@ export const AuthenticationContextProvider = ({children}) => {
     name: string,
     phoneNumber: string,
     address: string,
+    picture: string,
   ) => {
     setIsLoading(true);
     if (password !== repeatedPassword) {
@@ -77,6 +78,7 @@ export const AuthenticationContextProvider = ({children}) => {
                   address: address,
                   displayName: name,
                   email: email,
+                  picture: picture,
                 },
                 {merge: true},
               )

@@ -4,6 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AccountScreen} from '../../screens/AccountScreen/AccountScreen';
 import {LoginScreen} from '../../screens/LoginScreen/LoginScreen';
 import {RegisterScreen} from '../../screens/RegisterScreen/RegisterScreen';
+import {ProfileCamScreen} from '../../screens/ProfileCamScreen/ProfileCamScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,11 @@ export const AccountNavigator = () => (
       name="RegisterScreen"
       component={RegisterScreen}
       options={{headerShown: false}}
+    />
+    <Stack.Screen
+      name="ProfileCamScreen"
+      component={ProfileCamScreen}
+      options={{title: 'Take profile picture'}}
     />
   </Stack.Navigator>
 );

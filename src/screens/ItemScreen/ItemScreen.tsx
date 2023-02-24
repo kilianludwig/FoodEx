@@ -23,7 +23,7 @@ export const ItemScreen = ({navigation, route}) => {
     email: '',
     address: '',
     number: '',
-    picture: '',
+    picture: 'https://de.m.wikipedia.org/wiki/Datei:Solid_white.svg',
   });
 
   useEffect(() => {

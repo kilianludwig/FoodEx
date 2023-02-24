@@ -15,7 +15,7 @@ export const ProfileScreen = ({navigation}) => {
     email: user.email,
     address: '',
     number: '',
-    picture: '',
+    picture: 'https://de.m.wikipedia.org/wiki/Datei:Solid_white.svg',
   });
 
   const handleLogout = () => {
@@ -72,10 +72,10 @@ export const ProfileScreen = ({navigation}) => {
         title={'My Requests'}
         onPress={() => navigation.navigate('RequestsScreen')}
       />
-      <MainButton
-        title={'Settings'}
-        onPress={() => navigation.navigate('SettingsScreen')}
-      />
+      {/*<MainButton*/}
+      {/*  title={'Settings'}*/}
+      {/*  onPress={() => navigation.navigate('SettingsScreen')}*/}
+      {/*/>*/}
       <sc.LogOutButtonContainer>
         <TouchableOpacity onPress={handleLogout}>
           <sc.LogOutButton elevation={1}>

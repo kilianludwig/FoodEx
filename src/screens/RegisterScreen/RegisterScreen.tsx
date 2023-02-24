@@ -12,9 +12,21 @@ export const RegisterScreen = ({navigation}) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [address, setAddress] = useState('');
-
   const [repeatedPassword, setRepeatedPassword] = useState('');
+
   const {onRegister, isLoading, error} = useContext(AuthenticationContext);
+
+  const handleRegister = () => {
+    navigation.navigate('ProfileCamScreen', {
+      email,
+      password,
+      repeatedPassword,
+      name,
+      number,
+      address,
+    });
+  };
+
   return (
     <sc.AccountBackground>
       <sc.AccountBackgroundOpacity />
@@ -97,19 +109,7 @@ export const RegisterScreen = ({navigation}) => {
         <Spacer size="medium">
           <sc.ButtonContainer>
             {!isLoading ? (
-              <MainButton
-                title="Register"
-                onPress={() =>
-                  onRegister(
-                    email,
-                    password,
-                    repeatedPassword,
-                    name,
-                    number,
-                    address,
-                  )
-                }
-              />
+              <MainButton title="Register" onPress={() => handleRegister()} />
             ) : (
               <ActivityIndicator animating={true} />
             )}
